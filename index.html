@@ -99,7 +99,7 @@
   @keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
 
   /* 60 years */
-  .sixty{font-family:var(--disp);font-weight:700;font-size:clamp(140px,26vw,360px);line-height:.9;color:inherit;display:flex;align-items:baseline;gap:2vw}
+  .sixty{font-family:var(--disp);font-weight:700;font-size:clamp(64px,13vw,190px);line-height:.95;color:inherit;display:flex;align-items:baseline;gap:2vw}
   .sixty small{font-family:var(--disp);font-size:clamp(28px,5vw,72px);color:var(--gold)}
   .pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:8vh}
   .pillar{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/5;background:var(--ink2)}
@@ -270,7 +270,7 @@
 <section class="ch">
   <div class="inner">
     <div class="num rv">Chapter 02 / 06 — <b>Why it matters</b></div>
-    <div class="sixty rv d1"><span id="count">1st</span><small>space</small></div>
+    <div class="sixty rv d1"><span id="count">Home</span></div>
     <p class="lede rv d2" style="max-width:none">Flow builds your first, second and third space. Every space is a place for food, community and wellness to meet. Everything we create serves it, through four commitments: Wellbeing, Belonging, Experiences, and WorkFlow.</p>
     <div class="pillars">
       <div class="pillar rv"><img src="https://content-library.flowtools.life/api/thumbnail/1iF8KV24cSQhbScH_mbMQH-LCYs12psUX" alt="Yoga class at Flow"><div class="lab"><div class="k">01</div><div class="t">Wellbeing</div></div></div>
@@ -636,12 +636,15 @@
   var cio=new IntersectionObserver(function(es){
     es.forEach(function(e){
       if(e.isIntersecting&&!done){ done=true;
-        var steps=['1st','2nd','3rd'], si=0;
+        var steps=['Home','Work','3rd Space'], holds=[1100,1100,2200], si=0;
         c.textContent=steps[0];
-        setInterval(function(){
-          si=(si+1)%steps.length;
-          c.textContent=steps[si];
-        },900);
+        (function tick(){
+          setTimeout(function(){
+            si=(si+1)%steps.length;
+            c.textContent=steps[si];
+            tick();
+          },holds[si]);
+        })();
         cio.unobserve(c);
       }
     });
