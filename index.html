@@ -638,11 +638,10 @@
       if(e.isIntersecting&&!done){ done=true;
         var steps=['1st','2nd','3rd'], si=0;
         c.textContent=steps[0];
-        var iv=setInterval(function(){
-          si++;
-          if(si>=steps.length){ clearInterval(iv); return; }
+        setInterval(function(){
+          si=(si+1)%steps.length;
           c.textContent=steps[si];
-        },520);
+        },900);
         cio.unobserve(c);
       }
     });
